@@ -13,35 +13,6 @@
 
 /* Landing Page */
 
-.error-message {
-    font-size: 1rem;
-    color: #ff0000;
-    font-weight: bold;
-}
-
-.success-container {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    height: 200px;
-    width: 300px;
-    overflow: auto;
-    background-color: #7cfc00;
-    border-radius: 2rem;
-}
-
-.success-message {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
-    color: white;
-}
-
 body {
     margin: 0;
     display: flex;
@@ -564,6 +535,46 @@ footer {
     margin: 0 20px;
 }
 
+.query {
+    display: none;
+}
+
+.error-message {
+    font-size: 1rem;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.success-container {
+    display: none;
+}
+
+.success-message {
+    margin: 3.5rem auto 5rem auto;
+    height: 100%;
+    width: 100%;
+    background: #232323;
+    border-radius: 10px;
+    overflow: hidden;
+    color: #fff;
+    position: fixed;
+    z-index: 1;
+    left: 0%;
+    top: 0%;
+    overflow: auto;
+}
+
+#succes {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    text-align: center;
+    color: white;
+    margin: auto 3rem;
+}
+
 @media screen and (max-width: 800px) {
     .hero-section {
         display: block;
@@ -610,5 +621,67 @@ footer {
     }
     to {
         opacity: 1;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .topnav {
+        margin: 3.5% 27px 0 27px;
+    }
+    .header-logo img {
+        height: 1.5rem;
+    }
+    .main-navbar {
+        padding-top: 8px;
+    }
+    .fa {
+        color: red;
+    }
+    .hero-section {
+        min-height: 0;
+        margin-bottom: 0;
+    }
+    .hero-content {
+        padding: 0;
+        min-width: 0;
+    }
+    .hero-headline {
+        font-size: 2.3rem;
+        font-weight: 500;
+    }
+    .hero-text {
+        font-size: .8rem;
+        margin-top: 1rem;
+    }
+    .hero-img img {
+        margin-top: 1rem;
+    }
+    .hero-section>.btn-signup {
+        margin-top: 25px;
+    }
+    .copyrights {
+        margin-top: 0;
+        font-size: .8rem;
+    }
+    .query {
+        display: block;
+        margin-bottom: -1.5rem;
+    }
+    .modified {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .close:after,
+    .close:before {
+        height: 25px;
+    }
+    .modified label {
+        font-size: .5rem;
+    }
+    .formData label {
+        font-size: 13px;
+    }
+    .text-control {
+        height: 30px;
     }
 }

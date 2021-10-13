@@ -50,7 +50,35 @@ function counting(v) {
 }
 
 //Email Pattern
-const emailPattern = /^(a-zA-Z0-9\._]+)@(a-zA-Z0-9])+.([a-z]+)(.[a-z]+)?$/
+const patterns = {
+    first: /^[a-z]{2,}$/i,
+    last: /^[a-z]{2,}$/i,
+    email: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{3})$/,
+    birthdate: /^(?:(?:(?:0?[13578]|1[02])(\/|-|\.)31)\1|(?:(?:0?[1,3-9]|1[0-2])(\/|-|\.)(?:29|30)\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:0?2(\/|-|\.)29\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:(?:0?[1-9])|(?:1[0-2]))(\/|-|\.)(?:0?[1-9]|1\d|2[0-8])\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/,
+    quantity: /^[1-9]+$/,
+}
+const firstSecondNamePattern = /^[a-z]{1,10}$/
+const datePattern = /^(?:0[1-9]|[12]\d|3[01])([\/.-])(?:0[1-9]|1[012])\1(?:19|20)\d\d$/
+const emailPattern = /^(a-zA-Z0-9\._]+)@(a-zA-Z0-9])+.([a-z]{3})$/
+
+
+//Event Listener
+
+const inputs = document.querySelectorAll('input');
+
+function validate(field, regex) {
+    if (regex.test(field.value)) {
+        console.log('BRAVOH')
+    } else {
+        console.log(field.value)
+    }
+}
+
+inputs.forEach((input) => {
+    input.addEventListener('keyup', (e) => {
+        validate(e.target, patterns[e.target.attributes.name.value])
+    })
+})
 
 //Function of validation
 modalbg.addEventListener('submit', function(e) {
@@ -73,7 +101,7 @@ modalbg.addEventListener('submit', function(e) {
     //Prenom
     if (pre === 0) {
         prenomErrors.push('Entrer le prenom')
-    } else if (pre > 0 && pre < 3) {
+    } else if (pre > 0 && pre < 2) {
         prenomErrors.push('Veuillez entrer 2 caractères ou plus pour le champ du prenom.')
     } else {
         succes++;
@@ -82,7 +110,7 @@ modalbg.addEventListener('submit', function(e) {
     //Nom
     if (no === 0) {
         nomErrors.push('Entrer le nom')
-    } else if (no > 0 && no < 3) {
+    } else if (no > 0 && no < 2) {
         nomErrors.push('Veuillez entrer 2 caractères ou plus pour le champ du nom.')
     } else {
         succes++;
@@ -143,13 +171,13 @@ modalbg.addEventListener('submit', function(e) {
 
     if (succes == 6) {
         console.log(succes);
-        succesMessages.push("C'est parfait");
+        succesMessages.push("Merci ! Votre réservation a été reçue");
         closeModal();
 
         openSuccess.style.display = "block";
-        setTimeout(function() {
+        /*setTimeout(function() {
             openSuccess.style.display = "none";;
-        }, 4000);
+        }, 4000);*/
     }
 
 
