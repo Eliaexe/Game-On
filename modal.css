@@ -547,32 +547,45 @@ footer {
 
 .success-container {
     display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    margin-top: 3rem;
 }
 
 .success-message {
-    margin: 3.5rem auto 5rem auto;
-    height: 100%;
+    display: block;
+    margin: 0% auto;
     width: 100%;
+    max-width: 500px;
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
     background: #232323;
     border-radius: 10px;
     overflow: hidden;
+    position: relative;
     color: #fff;
-    position: fixed;
-    z-index: 1;
-    left: 0%;
-    top: 0%;
-    overflow: auto;
+    padding-top: 10px;
 }
 
 #succes {
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    height: 40rem;
+    padding: 5% 10% 0 10%;
     font-size: 2rem;
     text-align: center;
     color: white;
-    margin: auto 3rem;
+}
+
+.success-button {
+    margin: 2rem auto;
 }
 
 @media screen and (max-width: 800px) {
@@ -625,9 +638,6 @@ footer {
 }
 
 @media screen and (max-width: 400px) {
-    .topnav {
-        margin: 3.5% 27px 0 27px;
-    }
     .header-logo img {
         height: 1.5rem;
     }
@@ -683,5 +693,15 @@ footer {
     }
     .text-control {
         height: 30px;
+    }
+    .bground {
+        margin-top: 2rem;
+        background-color: transparent;
+    }
+    .success-message {
+        max-height: 610px;
+    }
+    #succes {
+        height: 30rem;
     }
 }
