@@ -29,10 +29,6 @@ p {
     padding: 0.5vw;
 }
 
-img {
-    padding-right: 1rem;
-}
-
 .topnav {
     overflow: hidden;
     margin: 3.5%;
@@ -40,6 +36,11 @@ img {
 
 .header-logo {
     float: left;
+}
+
+.header-logo img {
+    width: auto;
+    height: auto;
 }
 
 .main-navbar {
@@ -240,14 +241,6 @@ input {
 .formData[data-error-visible="true"] .text-control {
     border: 2px solid #e54858;
 }
-
-
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
 
 .checkbox-label,
 .checkbox2-label {
@@ -703,5 +696,17 @@ footer {
     }
     #succes {
         height: 30rem;
+    }
+}
+
+@media screen and (min-width: 400px) and (max-width: 525px) {
+    .main-navbar {
+        padding-top: 1rem;
+    }
+}
+
+@media screen and (min-width: 405px) and (max-width: 800px) {
+    .topnav {
+        margin: 3.5% 3rem;
     }
 }
