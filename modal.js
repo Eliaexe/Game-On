@@ -1,5 +1,3 @@
-//VARIABLES
-
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const formData = document.querySelectorAll(".formData");
@@ -30,8 +28,6 @@ function editNav() {
     }
 }
 
-
-
 //Function of validation
 modalbg.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -53,20 +49,32 @@ modalbg.addEventListener('submit', (e) => {
     const errQuantity = 'Vous devez entrer la quantitè de partie joue';
     const errDate = 'Vous devez entrer votre date de naissance';
 
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0');
+    let yyyy = today.getFullYear();
+
+    let today6 = (yyyy - 6) + '-' + mm + '-' + dd;
+    let yesterday = (yyyy - 90) + '-' + mm + '-' + dd;
+
     function controll(pattern, campo, errore, messaggio) {
         if (pattern.test(campo.value)) {
             succes++
         } else {
             errore.push(messaggio)
-
         }
     }
 
     controll(firstSecondNamePattern, prenom, prenomErrors, errPrenom)
     controll(firstSecondNamePattern, nom, nomErrors, errNom)
     controll(emailPattern, email, emailErrors, errEmail)
-    controll(datePattern, birth, birthErrors, errDate)
     controll(quantityPattern, quantity, quantityErrors, errQuantity)
+
+    if (birth.value > today6 || birth.value < yesterday) {
+        birthErrors.push(errDate)
+    } else {
+        controll(datePattern, birth, birthErrors, errDate)
+    }
 
     //City
     var radios = document.getElementsByName('location');
@@ -88,7 +96,6 @@ modalbg.addEventListener('submit', (e) => {
     if (checkbox.checked) {
         succes++
     } else {
-        console.log
         checkBoxSingleErrors.push('Vous devez accepter les conditions')
     }
     if (succes == 7) {
@@ -104,13 +111,7 @@ modalbg.addEventListener('submit', (e) => {
     document.getElementById('quantityError').innerText = quantityErrors
     document.getElementById('checkBoxError').innerText = checkBoxErrors;
     document.getElementById('checkBox-single').innerText = checkBoxSingleErrors;
-
-
-
-
-
 })
-
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));

@@ -105,10 +105,17 @@ p {
     .topnav a {
         display: none;
     }
+    .topnav a:hover,
+    .topnav a:active {
+        background-color: white;
+    }
     .topnav a.icon {
         float: right;
         display: block;
         margin-top: -15px;
+    }
+    .topnav.responsive .icon {
+        margin-top: -7px;
     }
 }
 
