@@ -13,8 +13,15 @@ const form = document.getElementById('form');
 const birth = document.getElementById('birthdate');
 const quantity = document.getElementById('quantity');
 const checkbox = document.getElementById('checkbox1');
-// Regex pattern
-const firstSecondNamePattern = /^[a-z]{2,}$/i;
+// Radio Button
+const el1 = document.getElementById("location1")
+const el2 = document.getElementById("location2")
+const el3 = document.getElementById("location3")
+const el4 = document.getElementById("location4")
+const el5 = document.getElementById("location5")
+const el6 = document.getElementById("location6")
+    // Regex pattern
+const firstSecondNamePattern = /^([a-zA-Z ]){2,30}$/;
 const emailPattern = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,})$/;
 const quantityPattern = /^[1-9]+$/;
 const datePattern = /^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/;
@@ -27,6 +34,34 @@ function editNav() {
         x.className = "topnav";
     }
 }
+
+//Game Played
+['change', 'click', 'keyup'].forEach(e => quantity.addEventListener(e,
+    function controllQ() {
+        if (quantityPattern.test(quantity.value)) {
+            el1.disabled = false;
+            el2.disabled = false;
+            el3.disabled = false;
+            el4.disabled = false;
+            el5.disabled = false;
+            el6.disabled = false;
+            succes++
+        } else {
+            el1.disabled = true;
+            el2.disabled = true;
+            el3.disabled = true;
+            el4.disabled = true;
+            el5.disabled = true;
+            el6.disabled = true;
+            el1.checked = false;
+            el2.checked = false;
+            el3.checked = false;
+            el4.checked = false;
+            el5.checked = false;
+            el6.checked = false;
+            succes++
+        }
+    }))
 
 //Function of validation
 modalbg.addEventListener('submit', (e) => {
@@ -54,8 +89,8 @@ modalbg.addEventListener('submit', (e) => {
     let mm = String(today.getMonth() + 1).padStart(2, '0');
     let yyyy = today.getFullYear();
 
-    let today6 = (yyyy - 6) + '-' + mm + '-' + dd;
-    let yesterday = (yyyy - 90) + '-' + mm + '-' + dd;
+    let today6 = (yyyy - 5) + '-' + mm + '-' + dd;
+    let yesterday95 = (yyyy - 95) + '-' + mm + '-' + dd;
 
     function controll(pattern, campo, errore, messaggio) {
         if (pattern.test(campo.value)) {
@@ -65,13 +100,19 @@ modalbg.addEventListener('submit', (e) => {
         }
     }
 
+
+
     controll(firstSecondNamePattern, prenom, prenomErrors, errPrenom)
     controll(firstSecondNamePattern, nom, nomErrors, errNom)
     controll(emailPattern, email, emailErrors, errEmail)
-    controll(quantityPattern, quantity, quantityErrors, errQuantity)
 
-    if (birth.value > today6 || birth.value < yesterday) {
-        birthErrors.push(errDate)
+    //Birthday
+    if (birth.value > today6) {
+        birthErrors.push("Vous êtes trop jeune pour participer")
+    } else if (birth.value === "") {
+        birthErrors.push("Veuillez entrer votre date de naissance")
+    } else if (birth.value < yesterday95) {
+        birthErrors.push("Vous êtes trop vieux pour participer")
     } else {
         controll(datePattern, birth, birthErrors, errDate)
     }
@@ -84,7 +125,10 @@ modalbg.addEventListener('submit', (e) => {
         if (radios[i].checked) {
             succes++;
             break;
-        } else if (!radios[i].checked) {
+        } else if (!radios.checked && !quantityPattern.test(quantity.value)) {
+            succes++;
+            break
+        } else if (!radios[i].checked && quantityPattern.test(quantity.value)) {
             cnt++
             if (cnt == 6) {
                 checkBoxErrors.push('Vous devez choisir une option.')
@@ -98,10 +142,13 @@ modalbg.addEventListener('submit', (e) => {
     } else {
         checkBoxSingleErrors.push('Vous devez accepter les conditions')
     }
-    if (succes == 7) {
+
+    if (succes == 6) {
         closeModal();
         openSuccess();
     }
+
+    console.log(succes)
 
     //Error messages     
     document.getElementById('prenomError').innerText = prenomErrors;
@@ -118,6 +165,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
     modalbg.style.display = "block";
+
 }
 
 modalCloseButton.addEventListener("click", closeModal); //Whaiting che click on the X modal button
@@ -127,6 +175,8 @@ function closeModal() {
 //Open Success
 function openSuccess() {
     document.getElementById("success-container").style.display = "block";
+    [prenom, nom, email, birth, quantity, checkbox, modalbg].forEach(e => e.value = "")
+
 }
 //Closing success 
 function closeSucces() {
